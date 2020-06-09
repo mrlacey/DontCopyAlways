@@ -39,7 +39,11 @@ namespace DontCopyAlways
                 }
                 else
                 {
-                    list.Add((project.Name, project.FileName));
+                    // Projects that are not loaded with the solution won't provide access to their properties (including the FileName)
+                    if (project.Properties != null)
+                    {
+                        list.Add((project.Name, project.FileName));
+                    }
                 }
             }
 
