@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+
+  <Commands package="guidDontCopyAlwaysPackage">
+    <Groups>
+      <Group guid="guidDontCopyAlwaysPackageCmdSet" id="MyMenuGroup"/>
+    </Groups>
+
+    <Buttons>
+      <Button guid="guidDontCopyAlwaysPackageCmdSet" id="DontCopyAlwaysCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidDontCopyAlwaysPackageCmdSet" id="MyMenuGroup" />
+        <Strings>
+          <ButtonText>Don't Always copy files to the output directory</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+
+  </Commands>
+
+    <CommandPlacements>
+
+        <CommandPlacement guid="guidDontCopyAlwaysPackageCmdSet" id="MyMenuGroup" priority="0x0799">
+            <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
+        </CommandPlacement>
+        <!--<CommandPlacement guid="guidDontCopyAlwaysPackageCmdSet" id="MyMenuGroup" priority="0x0899">
+            <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_SOLNNODE"/>
+        </CommandPlacement>-->
+    </CommandPlacements>
+    
+  <Symbols>
+    <!-- This is the package guid. -->
+    <GuidSymbol name="guidDontCopyAlwaysPackage" value="{452ef2b4-1788-49a6-8f34-b65812b45e8d}" />
+
+    <!-- This is the guid used to group the menu commands together -->
+    <GuidSymbol name="guidDontCopyAlwaysPackageCmdSet" value="{9df46588-dd0a-4303-97c5-057ba772f356}">
+      <IDSymbol name="MyMenuGroup" value="0x1020" />
+      <IDSymbol name="DontCopyAlwaysCommandId" value="0x0100" />
+    </GuidSymbol>
+
+  </Symbols>
+</CommandTable>
