@@ -45,15 +45,36 @@ namespace DontCopyAlways
 
         private void SolutionEvents_OnAfterLoadProject(object sender, LoadProjectEventArgs e)
         {
+#pragma warning disable VSTHRD102 // Implement internal logic asynchronously
             ThreadHelper.JoinableTaskFactory.Run(async () =>
+#pragma warning restore VSTHRD102 // Implement internal logic asynchronously
             {
                 await this.JoinableTaskFactory.SwitchToMainThreadAsync(this.DisposalToken);
 
-                e.RealHierarchy.GetProperty(VSConstants.VSITEMID_ROOT, (int)__VSHPROPID.VSHPROPID_ExtObject, out object projectObj);
-
-                if (projectObj is EnvDTE.Project project)
+                try
                 {
-                    Debug.WriteLine(project.FileName);
+                    e.RealHierarchy.GetProperty(VSConstants.VSITEMID_ROOT, (int)__VSHPROPID.VSHPROPID_ExtObject, out object projectObj);
+
+                    if (projectObj is EnvDTE.Project project)
+                    {
+                        var projName = project.Name;
+                        var projFile = project.FileName;
+
+                        // Get off the UI thread so don't lock UI
+                        await TaskScheduler.Default;
+
+                        await this.ReportOnProjectsAsync(new List<(string, string)> { (projName, projFile) });
+                    }
+                }
+                catch (Exception exc)
+                {
+                    await OutputPane.Instance.WriteAsync(string.Empty);
+                    await OutputPane.Instance.WriteAsync("Unexpected error when a project is loaded.");
+                    await OutputPane.Instance.WriteAsync("Please report these details at https://github.com/mrlacey/DontCopyAlways/issues/new");
+                    await OutputPane.Instance.WriteAsync(string.Empty);
+                    await OutputPane.Instance.WriteAsync(exc.GetType().ToString());
+                    await OutputPane.Instance.WriteAsync(exc.Message);
+                    await OutputPane.Instance.WriteAsync(exc.StackTrace);
                 }
             });
         }
@@ -64,7 +85,20 @@ namespace DontCopyAlways
         {
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(this.DisposalToken);
 
-            await this.CheckAllProjectsInSolutionAsync();
+            try
+            {
+                await this.CheckAllProjectsInSolutionAsync();
+            }
+            catch (Exception exc)
+            {
+                await OutputPane.Instance.WriteAsync(string.Empty);
+                await OutputPane.Instance.WriteAsync("Unexpected error when opening a solution.");
+                await OutputPane.Instance.WriteAsync("Please report these details at https://github.com/mrlacey/DontCopyAlways/issues/new");
+                await OutputPane.Instance.WriteAsync(string.Empty);
+                await OutputPane.Instance.WriteAsync(exc.GetType().ToString());
+                await OutputPane.Instance.WriteAsync(exc.Message);
+                await OutputPane.Instance.WriteAsync(exc.StackTrace);
+            }
         }
 
         private async Task CheckAllProjectsInSolutionAsync()
@@ -76,9 +110,14 @@ namespace DontCopyAlways
             // Get off the UI thread so don't lock UI while solution loads
             await TaskScheduler.Default;
 
+            await this.ReportOnProjectsAsync(projs);
+        }
+
+        private async Task ReportOnProjectsAsync(IList<(string, string)> projects)
+        {
             var issuesFound = new List<(string project, List<string> files)>();
 
-            foreach (var (name, filepath) in projs)
+            foreach (var (name, filepath) in projects)
             {
                 Debug.WriteLine(name);
 
