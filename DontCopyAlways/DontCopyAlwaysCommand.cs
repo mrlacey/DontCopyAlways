@@ -95,9 +95,7 @@ namespace DontCopyAlways
                     }
                 }
 
-                var dte = await this.ServiceProvider.GetServiceAsync(typeof(DTE)) as DTE2;
-
-                if (dte == null)
+                if (!(await this.ServiceProvider.GetServiceAsync(typeof(DTE)) is DTE2 dte))
                 {
                     return;
                 }
@@ -106,16 +104,13 @@ namespace DontCopyAlways
 
                 foreach (UIHierarchyItem selItem in files)
                 {
-                    var proj = selItem.Object as Project;
-
-                    if (proj != null && !string.IsNullOrEmpty(proj.FileName))
+                    if (selItem.Object is Project proj && !string.IsNullOrEmpty(proj.FileName))
                     {
                         await UpdateProjectFileEntries(proj.FileName);
                     }
                     else
                     {
-                        var sol = selItem.Object as Solution;
-                        if (sol != null && !string.IsNullOrEmpty(sol.FileName))
+                        if (selItem.Object is Solution sol && !string.IsNullOrEmpty(sol.FileName))
                         {
                             // TODO: if solution loop through each project - need to get project files from reading the solution file
                             // Will need to reenable the solution menu option in vsct for this
