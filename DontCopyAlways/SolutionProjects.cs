@@ -18,11 +18,15 @@ namespace DontCopyAlways
             return Package.GetGlobalService(typeof(DTE)) as DTE2;
         }
 
-        public static async Task<IList<(string name, string filePath)>> GetProjectsAsync()
+        public static async Task<IList<(string name, string filePath)>> GetProjectsAsync(Projects projects = null)
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-            Projects projects = GetActiveIDE().Solution.Projects;
+            if (projects == null)
+            {
+                projects = GetActiveIDE().Solution.Projects;
+            }
+
             var list = new List<(string, string)>();
             var item = projects.GetEnumerator();
 

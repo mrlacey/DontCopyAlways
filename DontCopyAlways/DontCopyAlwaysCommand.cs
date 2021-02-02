@@ -112,9 +112,10 @@ namespace DontCopyAlways
                     {
                         if (selItem.Object is Solution sol && !string.IsNullOrEmpty(sol.FileName))
                         {
-                            // TODO: if solution loop through each project - need to get project files from reading the solution file
-                            // Will need to reenable the solution menu option in vsct for this
-                            System.Diagnostics.Debug.WriteLine(sol.FileName);
+                            foreach (var (_, fileName) in await SolutionProjects.GetProjectsAsync(sol.Projects))
+                            {
+                                await UpdateProjectFileEntries(fileName);
+                            }
                         }
                     }
                 }

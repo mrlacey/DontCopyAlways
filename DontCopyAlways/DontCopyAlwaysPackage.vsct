@@ -25,9 +25,9 @@
         <CommandPlacement guid="guidDontCopyAlwaysPackageCmdSet" id="MyMenuGroup" priority="0x0799">
             <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
         </CommandPlacement>
-        <!--<CommandPlacement guid="guidDontCopyAlwaysPackageCmdSet" id="MyMenuGroup" priority="0x0899">
+        <CommandPlacement guid="guidDontCopyAlwaysPackageCmdSet" id="MyMenuGroup" priority="0x0899">
             <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_SOLNNODE"/>
-        </CommandPlacement>-->
+        </CommandPlacement>
     </CommandPlacements>
     
   <Symbols>
