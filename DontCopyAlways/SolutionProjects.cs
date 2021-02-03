@@ -32,7 +32,8 @@ namespace DontCopyAlways
 
             while (item.MoveNext())
             {
-                if (!(item.Current is Project project))
+                // skip if Current item is not a project or if the project Kind is a Web Site project
+                if (!(item.Current is Project project) || project.Kind == "{E24C65DC-7377-472b-9ABA-BC803B73C61A}")
                 {
                     continue;
                 }
