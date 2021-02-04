@@ -10,12 +10,18 @@
     </Groups>
 
     <Buttons>
-      <Button guid="guidDontCopyAlwaysPackageCmdSet" id="DontCopyAlwaysCommandId" priority="0x0100" type="Button">
-        <Parent guid="guidDontCopyAlwaysPackageCmdSet" id="MyMenuGroup" />
-        <Strings>
-          <ButtonText>Don't Always copy files to the output directory</ButtonText>
-        </Strings>
-      </Button>
+        <Button guid="guidDontCopyAlwaysPackageCmdSet" id="DontCopyAlwaysCommandId" priority="0x0100" type="Button">
+            <Parent guid="guidDontCopyAlwaysPackageCmdSet" id="MyMenuGroup" />
+            <Strings>
+                <ButtonText>Don't Always copy files to the output directory</ButtonText>
+            </Strings>
+        </Button>
+        <Button guid="guidDontCopyAlwaysPackageCmdSet" id="CheckCopyToOutputDirCommandId" priority="0x0200" type="Button">
+            <Parent guid="guidDontCopyAlwaysPackageCmdSet" id="MyMenuGroup" />
+            <Strings>
+                <ButtonText>Check Copy to Output Directory settings</ButtonText>
+            </Strings>
+        </Button>
     </Buttons>
 
   </Commands>
@@ -38,6 +44,7 @@
     <GuidSymbol name="guidDontCopyAlwaysPackageCmdSet" value="{9df46588-dd0a-4303-97c5-057ba772f356}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="DontCopyAlwaysCommandId" value="0x0100" />
+      <IDSymbol name="CheckCopyToOutputDirCommandId" value="0x0101" />
     </GuidSymbol>
 
   </Symbols>

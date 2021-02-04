@@ -39,6 +39,7 @@ namespace DontCopyAlways
             SolutionEvents.OnAfterLoadProject += this.SolutionEvents_OnAfterLoadProject;
 
             await DontCopyAlwaysCommand.InitializeAsync(this);
+            await CheckCopyToOutputDirectorySettingsCommand.InitializeAsync(this);
 
             await this.CheckAllProjectsInSolutionAsync();
         }
@@ -63,7 +64,7 @@ namespace DontCopyAlways
                         // Get off the UI thread so don't lock UI
                         await TaskScheduler.Default;
 
-                        await this.ReportOnProjectsAsync(new List<(string, string)> { (projName, projFile) });
+                        await ReportOnProjectsAsync(new List<(string, string)> { (projName, projFile) });
                     }
                 }
                 catch (Exception exc)
@@ -110,10 +111,10 @@ namespace DontCopyAlways
             // Get off the UI thread so don't lock UI while solution loads
             await TaskScheduler.Default;
 
-            await this.ReportOnProjectsAsync(projs);
+            await ReportOnProjectsAsync(projs);
         }
 
-        private async Task ReportOnProjectsAsync(IList<(string, string)> projects)
+        internal static async Task ReportOnProjectsAsync(IList<(string, string)> projects)
         {
             var issuesFound = new List<(string project, List<string> files)>();
 
