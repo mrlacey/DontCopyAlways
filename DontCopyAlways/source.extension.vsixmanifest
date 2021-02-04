@@ -5,6 +5,7 @@
         <DisplayName>Don't Copy Always</DisplayName>
         <Description xml:space="preserve">Check for files that have 'Copy to output directory' set to 'Copy always'.</Description>
         <MoreInfo>https://github.com/mrlacey/DontCopyAlways</MoreInfo>
+        <License>LICENSE</License>
         <Icon>Resources\DontCopyAlwaysLogo.png</Icon>
     </Metadata>
     <Installation>
