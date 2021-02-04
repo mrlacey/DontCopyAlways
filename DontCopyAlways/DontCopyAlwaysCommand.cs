@@ -65,20 +65,30 @@ namespace DontCopyAlways
                     {
                         if (File.Exists(projFilePath) && projFilePath.EndsWith("proj"))
                         {
-                            var fileContents = File.ReadAllText(projFilePath);
+                            string fileContents = null;
+                            System.Text.Encoding encoding;
 
-                            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(CancellationToken.None);
-
-                            if (fileContents.Contains(AlwaysXml))
+                            using (var reader = new StreamReader(projFilePath, detectEncodingFromByteOrderMarks: true))
                             {
-                                var newContents = fileContents.Replace(AlwaysXml, PreserveNewestXml);
-                                File.WriteAllText(projFilePath, newContents);
-
-                                await OutputPane.Instance.WriteAsync($"Updated '{projFilePath}'.");
+                                fileContents = reader.ReadToEnd();
+                                encoding = reader.CurrentEncoding;
                             }
-                            else
+
+                            if (!string.IsNullOrWhiteSpace(fileContents))
                             {
-                                await OutputPane.Instance.WriteAsync($"No changes made to '{projFilePath}'.");
+                                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(CancellationToken.None);
+
+                                if (fileContents.Contains(AlwaysXml))
+                                {
+                                    var newContents = fileContents.Replace(AlwaysXml, PreserveNewestXml);
+                                    File.WriteAllText(projFilePath, newContents, encoding);
+
+                                    await OutputPane.Instance.WriteAsync($"Updated '{projFilePath}'.");
+                                }
+                                else
+                                {
+                                    await OutputPane.Instance.WriteAsync($"No changes made to '{projFilePath}'.");
+                                }
                             }
 
                             await TaskScheduler.Default;
