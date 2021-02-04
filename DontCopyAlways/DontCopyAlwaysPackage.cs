@@ -22,7 +22,7 @@ namespace DontCopyAlways
     [ProvideAutoLoad(UIContextGuids.SolutionHasMultipleProjects, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideAutoLoad(UIContextGuids.SolutionHasSingleProject, PackageAutoLoadFlags.BackgroundLoad)]
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [InstalledProductRegistration("Don't Copy Always", "Check for files that have 'Copy to output directory' set to 'Copy always'.", "1.1")] // Info on this package for Help/About
+    [InstalledProductRegistration("Don't Copy Always", "Check for files that have 'Copy to output directory' set to 'Copy always'.", "1.2")] // Info on this package for Help/About
     [Guid(DontCopyAlwaysPackage.PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     public sealed class DontCopyAlwaysPackage : AsyncPackage
