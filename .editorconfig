@@ -4,7 +4,7 @@
 dotnet_analyzer_diagnostic.category-StyleCop.CSharp.OrderingRules.severity = none
 
 # SA1600: Elements should be documented
-dotnet_diagnostic.SA1600.severity = none
+dotnet_diagnostic.SA1600.severity = silent
 
 # SA1502: Element should not be on a single line
 dotnet_diagnostic.SA1502.severity = none
