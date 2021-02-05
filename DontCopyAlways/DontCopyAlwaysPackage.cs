@@ -123,6 +123,12 @@ namespace DontCopyAlways
             {
                 Debug.WriteLine(name);
 
+                if (!Path.IsPathRooted(filepath))
+                {
+                    // If don't have the full path to the file then can't load it.
+                    continue;
+                }
+
                 var attrs = File.GetAttributes(filepath);
 
                 if (attrs.HasFlag(FileAttributes.Directory))
