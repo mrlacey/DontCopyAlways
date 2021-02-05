@@ -35,7 +35,7 @@ namespace DontCopyAlways
 
         public static DontCopyAlwaysCommand Instance { get; private set; }
 
-        private IAsyncServiceProvider ServiceProvider { get { return this.package; } }
+        private IAsyncServiceProvider ServiceProvider => this.package;
 
         public static async Task InitializeAsync(AsyncPackage package)
         {
