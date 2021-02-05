@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -121,6 +122,15 @@ namespace DontCopyAlways
             foreach (var (name, filepath) in projects)
             {
                 Debug.WriteLine(name);
+
+                var attrs = File.GetAttributes(filepath);
+
+                if (attrs.HasFlag(FileAttributes.Directory))
+                {
+                    // If the project is based on a directory (like a website)
+                    // It won't have a project file we can load.
+                    continue;
+                }
 
                 var doc = new XmlDocument();
                 doc.Load(filepath);

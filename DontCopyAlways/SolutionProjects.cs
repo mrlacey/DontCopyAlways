@@ -10,9 +10,11 @@ using Microsoft.VisualStudio.Shell;
 
 namespace DontCopyAlways
 {
-    // Originally from https://wwwlicious.com/envdte-getting-all-projects-html/
+    // Based on https://wwwlicious.com/envdte-getting-all-projects-html/
     public static class SolutionProjects
     {
+        private const string WebSiteProjectKind = "{E24C65DC-7377-472b-9ABA-BC803B73C61A}";
+
         public static DTE2 GetActiveIDE()
         {
             return Package.GetGlobalService(typeof(DTE)) as DTE2;
@@ -32,8 +34,8 @@ namespace DontCopyAlways
 
             while (item.MoveNext())
             {
-                // skip if Current item is not a project or if the project Kind is a Web Site project
-                if (!(item.Current is Project project) || project.Kind == "{E24C65DC-7377-472b-9ABA-BC803B73C61A}")
+                // skip if Current item is not a project or if the project Kind is a Web Site project (as won't have a project file to load)
+                if (!(item.Current is Project project) || project.Kind == WebSiteProjectKind)
                 {
                     continue;
                 }
@@ -74,7 +76,8 @@ namespace DontCopyAlways
                 {
                     list.AddRange(GetSolutionFolderProjects(subProject));
                 }
-                else
+                else if (subProject is Project proj
+                    && proj.Kind != WebSiteProjectKind)
                 {
                     list.Add((subProject.Name, subProject.FileName));
                 }
