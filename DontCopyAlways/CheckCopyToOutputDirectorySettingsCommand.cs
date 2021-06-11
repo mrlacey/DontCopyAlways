@@ -76,6 +76,9 @@ namespace DontCopyAlways
                         }
                     }
                 }
+
+                await OutputPane.Instance.WriteAsync($"{DateTime.Now:T} rechecking settings complete.");
+                await OutputPane.Instance.WriteAsync(string.Empty);
             }
             catch (Exception exc)
             {
