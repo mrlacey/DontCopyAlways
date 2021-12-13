@@ -43,6 +43,8 @@ namespace DontCopyAlways
             await CheckCopyToOutputDirectorySettingsCommand.InitializeAsync(this);
 
             await this.CheckAllProjectsInSolutionAsync();
+
+            await SponsorRequestHelper.CheckIfNeedToShowAsync();
         }
 
         private void SolutionEvents_OnAfterLoadProject(object sender, LoadProjectEventArgs e)
@@ -71,12 +73,14 @@ namespace DontCopyAlways
                 catch (Exception exc)
                 {
                     await OutputPane.Instance.WriteAsync(string.Empty);
-                    await OutputPane.Instance.WriteAsync("Unexpected error when a project is loaded.");
+                    await OutputPane.Instance.WriteAsync("Unexpected error when a project was loaded.");
                     await OutputPane.Instance.WriteAsync("Please report these details at https://github.com/mrlacey/DontCopyAlways/issues/new");
                     await OutputPane.Instance.WriteAsync(string.Empty);
                     await OutputPane.Instance.WriteAsync(exc.GetType().ToString());
                     await OutputPane.Instance.WriteAsync(exc.Message);
                     await OutputPane.Instance.WriteAsync(exc.StackTrace);
+                    await OutputPane.Instance.WriteAsync(string.Empty);
+                    await OutputPane.Instance.ActivateAsync();
                 }
             });
         }
@@ -187,9 +191,7 @@ namespace DontCopyAlways
                 }
 
                 await OutputPane.Instance.WriteAsync("Changing this setting can save you time and money.");
-                await OutputPane.Instance.WriteAsync("Show your appreciation at https://www.buymeacoffee.com/mrlacey");
-                await OutputPane.Instance.WriteAsync(string.Empty);
-                await OutputPane.Instance.WriteAsync("Prefer not to see this message? Email DontCopyAlways@mrlacey.com with details of how much you'll pay to remove it.");
+                await OutputPane.Instance.WriteAsync("Show your appreciation by becoming a sponsor https://github.com/sponsors/mrlacey");
                 await OutputPane.Instance.WriteAsync(string.Empty);
 
                 await OutputPane.Instance.ActivateAsync();
