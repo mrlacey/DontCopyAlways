@@ -4,16 +4,17 @@
 
 using System.Reflection;
 using System.Runtime.InteropServices;
+using DontCopyAlways;
 
-[assembly: AssemblyTitle("DontCopyAlways")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle(Vsix.Name)]
+[assembly: AssemblyDescription(Vsix.Description)]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Matt Lacey Ltd.")]
-[assembly: AssemblyProduct("DontCopyAlways")]
-[assembly: AssemblyCopyright("Copyright © Matt Lacey Ltd. 2021")]
+[assembly: AssemblyProduct(Vsix.Name)]
+[assembly: AssemblyCopyright("Copyright © Matt Lacey Ltd. 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("1.5.*")]
-[assembly: AssemblyFileVersion("1.5.0.0")]
+[assembly: AssemblyVersion(Vsix.Version)]
+[assembly: AssemblyFileVersion(Vsix.Version)]
