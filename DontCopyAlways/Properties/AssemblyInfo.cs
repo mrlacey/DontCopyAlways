@@ -11,7 +11,7 @@ using DontCopyAlways;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Matt Lacey Ltd.")]
 [assembly: AssemblyProduct(Vsix.Name)]
-[assembly: AssemblyCopyright("Copyright © Matt Lacey Ltd. 2022")]
+[assembly: AssemblyCopyright("Copyright © Matt Lacey Ltd. 2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
