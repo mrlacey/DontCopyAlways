@@ -20,8 +20,8 @@ jobs:
     env:
       Configuration: Debug
       DeployExtension: False
-      VsixManifestPath: src\source.extension.vsixmanifest
-      VsixManifestSourcePath: src\source.extension.cs
+      VsixManifestPath: DontCopyAlways\source.extension.vsixmanifest
+      VsixManifestSourcePath: DontCopyAlways\source.extension.cs
       
     steps:
     - uses: actions/checkout@v4
