@@ -120,6 +120,7 @@
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="filestosign.txt" />
     <Content Include="Resources\DontCopyAlwaysLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
