@@ -11,7 +11,7 @@ namespace DontCopyAlways
         public const string Name = "Don't Copy Always";
         public const string Description = @"Check for files that have 'Copy to output directory' set to 'Copy always'.";
         public const string Language = "en-US";
-        public const string Version = "1.5.4";
+        public const string Version = "1.5.5";
         public const string Author = "Matt Lacey";
         public const string Tags = "";
     }
