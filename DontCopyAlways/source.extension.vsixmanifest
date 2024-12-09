@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="DontCopyAlways.d38e1a6d-0c1c-4aab-bf12-2cc84406b005" Version="1.5.6" Language="en-US" Publisher="Matt Lacey" />
+        <Identity Id="DontCopyAlways.d38e1a6d-0c1c-4aab-bf12-2cc84406b005" Version="1.5.7" Language="en-US" Publisher="Matt Lacey" />
         <DisplayName>Don't Copy Always</DisplayName>
         <Description xml:space="preserve">Check for files that have 'Copy to output directory' set to 'Copy always'.</Description>
         <MoreInfo>https://github.com/mrlacey/DontCopyAlways</MoreInfo>
