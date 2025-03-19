@@ -38,6 +38,8 @@ namespace DontCopyAlways
 			// Do any initialization that requires the UI thread after switching to the UI thread.
 			await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
+			await OutputPane.Instance.WriteAsync($"{Vsix.Name} v{Vsix.Version}");
+
 			SolutionEvents.OnAfterOpenSolution += this.SolutionEvents_OnAfterOpenSolution;
 			SolutionEvents.OnAfterLoadProject += this.SolutionEvents_OnAfterLoadProject;
 
